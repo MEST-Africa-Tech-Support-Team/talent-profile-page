@@ -173,7 +173,7 @@ export default function TalentsPage() {
           {/* Filter Button */}
           <button
             onClick={() => setIsFilterSidebarOpen(true)}
-            className="px-6 py-3 rounded-xl bg-teal-600 text-white font-semibold shadow hover:bg-teal-700 transition-all"
+            className="px-6 py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow hover:bg-[#24AB87] transition-all cursor-pointer"
           >
             Filter
           </button>
