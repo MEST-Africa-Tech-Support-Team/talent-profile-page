@@ -27,7 +27,7 @@ export default function TalentCard({ name, role, image, onViewProfile, skills = 
       <button
         onClick={onViewProfile}
         // Adjusted button styling to better match the screenshot's teal/blue color
-        className="mt-auto px-12 py-2 bg-teal-600  text-white rounded-xl hover:bg-teal -700 transition-colors text-sm font-medium" 
+        className="mt-auto px-12 py-2 bg-[#28BBBB]  text-white rounded-xl hover:bg-teal -700 transition-colors text-sm font-medium cursor-pointer" 
       >
         View Profile
       </button>

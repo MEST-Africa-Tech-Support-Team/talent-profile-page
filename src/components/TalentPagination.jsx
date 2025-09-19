@@ -27,7 +27,7 @@ export default function TalentPagination({ currentPage, totalPages, onPageChange
             onClick={() => onPageChange(page)}
             className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
               currentPage === page
-                ? "bg-teal-600 text-white"
+                ? "bg-[#28BBBB] text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >
