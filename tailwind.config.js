@@ -1,3 +1,4 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -8,9 +9,16 @@ export default {
         extend: {
             fontFamily: {
                 'brown': ['Brown', 'sans-serif'],
-                'brown-reclin': ['Brown Reclin', 'sans-serif'],
+                // Optional: Separate families if you want to use Reclin separately
+                'brown-reclin': ['Brown', 'sans-serif'], // Or keep as Brown if they're similar
             },
-            // ... your other theme extensions
+            fontWeight: {
+                // Extend fontWeight scale if needed
+                'thin': 100,
+                'light': 300,
+                'normal': 400,
+                'bold': 700,
+            }
         },
     },
     plugins: [],
