@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+:root {
+    --font-brown: "Brown", sans-serif;
+}
+
+@theme {
+    /* Fonts */
+    --font-primary: 'Brown Pro', 'Inter', sans-serif;
+    --font-heading: 'Brown Pro', Calibri, Helvetica, Arial, sans-serif;
+
+    /* Colors */
+    --color-primary-100: #28BBBB;
+    --color-secondary: #333333;
+    --color-accent: #FF9900;
+    --yellow-color: #FF6221;
+
+    /* Others */
+    --border-radius: 12px;
+    --shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    /*font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");*/
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+    font-family: var(--font-primary), serif;
+}
+
+/*!* Your custom font faces *!*/
+/*@font-face {*/
+/*    font-family: 'BrownPro';*/
+/*    src: url('./assets/fonts/brown/Brown-Bold.otf') format('opentype');*/
+/*    font-weight: 700;*/
+/*    font-style: normal;*/
+/*    font-display: swap;*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'BrownPro';*/
+/*    src: url('./assets/fonts/brown/Brown-BoldItalic.otf') format('opentype');*/
+/*    font-weight: 700;*/
+/*    font-style: italic;*/
+/*    font-display: swap;*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'BrownPro';*/
+/*    src: url('./assets/fonts/brown/Brown-Light.otf') format('opentype');*/
+/*    font-weight: 300;*/
+/*    font-style: normal;*/
+/*    font-display: swap;*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'BrownPro';*/
+/*    src: url('./assets/fonts/brown/Brown-LightItalic.otf') format('opentype');*/
+/*    font-weight: 300;*/
+/*    font-style: italic;*/
+/*    font-display: swap;*/
+/*}*/
