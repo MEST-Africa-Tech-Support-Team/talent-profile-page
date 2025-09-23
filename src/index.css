@@ -1,71 +1,102 @@
 @import "tailwindcss";
-/* Brown Font Family - Regular Weights */
+
+/* ===============================
+   Brown Font Family - Regular Weights
+   =============================== */
 @font-face {
-    font-family: 'Brown';
-    font-style: normal;
-    font-weight: 100;
-    font-display: swap;
-    src: url('/fonts/Brown-Thin.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/Brown-Thin.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Brown';
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
-    src: url('/fonts/Brown-Light.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/Brown-Light.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Brown';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/Brown-Regular.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/Brown-Regular.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Brown';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url('/fonts/Brown-Bold.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/Brown-Bold.otf') format('opentype');
 }
 
-/* Brown Font Family - Italic Styles */
+/* ===============================
+   Brown Font Family - Italic Styles
+   =============================== */
 @font-face {
-    font-family: 'Brown';
-    font-style: italic;
-    font-weight: 100;
-    font-display: swap;
-    src: url('/fonts/Brown-ThinItalic.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'Brown';
-    font-style: italic;
-    font-weight: 300;
-    font-display: swap;
-    src: url('/fonts/Brown-LightItalic.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/Brown-ThinItalic.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Brown';
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/Brown-Italic.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/Brown-LightItalic.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Brown';
-    font-style: italic;
-    font-weight: 700;
-    font-display: swap;
-    src: url('/fonts/Brown-BoldItalic.otf') format('opentype');
+  font-family: 'Brown';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/Brown-Italic.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'Brown';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/Brown-BoldItalic.otf') format('opentype');
+}
+
+/* ===============================
+   Theme Variables
+   =============================== */
 @theme {
-    --font-brown: "Brown", sans-serif;
-    --font-sans: "Brown", ui-sans-serif, system-ui, sans-serif; /* Optional: make Brown your default */
+  --font-brown: "Brown", sans-serif;
+  --font-sans: "Brown", ui-sans-serif, system-ui, sans-serif;
+
+  /* Colors */
+  --color-primary-100: #28BBBB;
+  --color-secondary: #333333;
+  --color-accent: #FF6221;
+  --yellow-color: #FF6221;
+
+  /* 
+  Lead Colors
+  #28bbbb - Primary Green
+  #333333 - Black
+
+  Supporting Colors 
+  #b627a1 - Purple
+  #ffbc45 - Yellow
+  #ff6221 - Orange
+  #00ca9b - Secondary Green
+  #949494 - Ash
+  */
+
+  /* Others */
+  --border-radius: 12px;
+  --shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }

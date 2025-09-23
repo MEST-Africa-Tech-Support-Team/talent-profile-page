@@ -13,7 +13,7 @@ export default function TalentsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [talentsPerPage] = useState(12);
+  const [talentsPerPage] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedTalent, setSelectedTalent] = useState(null);
   const [talentProfile, setTalentProfile] = useState(null);
@@ -58,8 +58,13 @@ export default function TalentsPage() {
       .then((response) => {
         const portfolios = response.data.portfolios || response.data;
         if (Array.isArray(portfolios)) {
-          setTalents(portfolios);
-          setTotalPages(Math.ceil(portfolios.length / talentsPerPage));
+          // ✅ sort alphabetically by "name"
+          const sortedPortfolios = [...portfolios].sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
+
+          setTalents(sortedPortfolios);
+          setTotalPages(Math.ceil(sortedPortfolios.length / talentsPerPage));
         } else {
           throw new Error("API response is not a valid array.");
         }
@@ -99,48 +104,54 @@ export default function TalentsPage() {
 
   const indexOfLastTalent = currentPage * talentsPerPage;
   const indexOfFirstTalent = indexOfLastTalent - talentsPerPage;
-  const displayedTalents = talents.slice(
-    indexOfFirstTalent,
-    indexOfLastTalent
-  );
+  const displayedTalents = talents.slice(indexOfFirstTalent, indexOfLastTalent);
 
   return (
     <PageWrapper className="bg-white">
-        <Banner />  
+      <Banner />
 
       <div className="min-h-[100vh] px-4 bg-white">
         {/* Search + Select + Filter button */}
         <div className="my-8 flex flex-col md:flex-row gap-4 items-center justify-center max-w-4xl mx-auto">
-          {/* Search */}
-          <div className="relative flex-1 w-full md:max-w-md">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              placeholder={`Search talents by ${filters.searchField}`}
-              value={filters.search}
-              onChange={(e) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  search: e.target.value,
-                }))
-              }
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-100)] text-gray-900 placeholder-gray-500"
-            />
-          </div>
+          {/* Search */}  
+<div className="relative flex-1 w-full md:max-w-md">
+  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <svg
+      className="h-5 w-5 text-gray-400"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  </div>
+
+  {/* ✅ Dynamic placeholder with examples */}
+  <input
+    type="text"
+    placeholder={
+      {
+        name: "Search talents by name (e.g. Abdul Gafar Issah)",
+        skills: "Search talents by skill (e.g. React.js, Node.js)",
+        role: "Search talents by role (e.g. Frontend, Backend, Fullstack)",
+      }[filters.searchField] || "Search talents"
+    }
+    value={filters.search}
+    onChange={(e) =>
+      setFilters((prev) => ({
+        ...prev,
+        search: e.target.value,
+      }))
+    }
+    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-100)] text-gray-900 placeholder-gray-500"
+  />
+</div>
+
 
           {/* Select */}
           <div className="relative">
@@ -165,7 +176,12 @@ export default function TalentsPage() {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </div>
           </div>
@@ -173,7 +189,7 @@ export default function TalentsPage() {
           {/* Filter Button */}
           <button
             onClick={() => setIsFilterSidebarOpen(true)}
-            className="px-6 py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow hover:bg-[#24AB87] transition-all cursor-pointer"
+            className="px-6 py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow transition-all cursor-pointer"
           >
             Filter
           </button>
