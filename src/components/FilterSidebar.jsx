@@ -6,7 +6,7 @@ const skillsList = ["ReactJS", "Node.js", "Css 3", "HTML5", "Tailwind", "Javascr
 const rolesList = ["Backend", "Frontend", "Fullstack"];
 // const availabilityList = ["Available", "Full-time", "Part-time", "Contract"];
 const availabilityList = ["Yes", "No"];
-const cohortsList = ["Cohort 4"]; // Example cohorts
+const cohortsList = ["Cohort 4", "Cohort 5"]; // Example cohorts
 
 export default function FilterSidebar({ filters, setFilters, onClose }) {
   // Use a local state to manage changes before applying
@@ -62,7 +62,7 @@ const handleClearAll = () => {
       <div className="absolute right-0 top-0 h-full w-80 max-w-full bg-white p-6 shadow-lg transform transition-transform duration-300 ease-in-out translate-x-0">
         <div className="flex items-center justify-between pb-4 border-b border-gray-200">
           <h2 className="text-2xl font-bold">Filters</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 cursor-pointer">
             <X size={24} />
           </button>
         </div>
@@ -83,7 +83,7 @@ const handleClearAll = () => {
         <div className="flex flex-col gap-6 overflow-y-auto flex-1">
           {/* Skills Filter Section */}
           <div>
-            <h3 className="font-semibold text-lg mb-2">Skills</h3>
+            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Skills</h3>
             <div className="flex flex-wrap gap-2">
               {skillsList.map((skill) => (
                 <span
@@ -91,8 +91,8 @@ const handleClearAll = () => {
                   onClick={() => handleArrayChange("skills", skill)}
                   className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                     localFilters.skills.includes(skill)
-                      ? "bg-teal-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-[#28bbbb] text-white"
+                      : "bg-[#949494] text-[#fff] "
                   }`}
                 >
                   {skill}
@@ -103,7 +103,7 @@ const handleClearAll = () => {
 
           {/* Roles Filter Section */}
           <div>
-            <h3 className="font-semibold text-lg mb-2">Roles</h3>
+            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Roles</h3>
             <div className="flex flex-wrap gap-2">
               {rolesList.map((role) => (
                 <span
@@ -111,8 +111,8 @@ const handleClearAll = () => {
                   onClick={() => handleArrayChange("roles", role)}
                   className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                     localFilters.roles.includes(role)
-                      ? "bg-teal-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                       ? "bg-[#28bbbb] text-white"
+                      : "bg-[#949494] text-[#fff] "
                   }`}
                 >
                   {role}
@@ -123,16 +123,16 @@ const handleClearAll = () => {
 
           {/* Availability Filter Section */}
           <div>
-            <h3 className="font-semibold text-lg mb-2">Availability</h3>
+            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Availability</h3>
             <div className="flex flex-wrap gap-2">
               {availabilityList.map((availability) => (
                 <span
                   key={availability}
                   onClick={() => handleSingleSelectChange("availability", availability)}
-                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors  ${
                     localFilters.availability === availability
-                      ? "bg-teal-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                       ? "bg-[#28bbbb] text-white"
+                      : "bg-[#949494] text-[#fff] "
                   }`}
                 >
                   {availability}
@@ -142,17 +142,17 @@ const handleClearAll = () => {
           </div>
 
           {/* Cohort Filter Section */}
-          <div>
-            <h3 className="font-semibold text-lg mb-2">Cohort</h3>
+          <div className="mb-8">
+            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Cohort</h3>
             <div className="flex flex-wrap gap-2">
               {cohortsList.map((cohort) => (
                 <span
                   key={cohort}
                   onClick={() => handleSingleSelectChange("cohort", cohort)}
-                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors  ${
                     localFilters.cohort === cohort
-                      ? "bg-teal-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-[#28bbbb] text-white"
+                      : "bg-[#949494] text-[#fff] "
                   }`}
                 >
                   {cohort}
@@ -164,10 +164,10 @@ const handleClearAll = () => {
 
         {/* Action Buttons */}
         <div className="p-6 flex justify-between items-center border-t border-gray-200">
-          <button onClick={handleClearAll} className="text-sm font-semibold text-red-500 hover:underline">
+          <button onClick={handleClearAll} className="text-sm font-semibold text-[#ff6221] hover:underline cursor-pointer">
             Clear All
           </button>
-          <button onClick={handleApplyFilters} className="px-6 py-2 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-700">
+          <button onClick={handleApplyFilters} className="px-6 py-2 rounded-lg bg-[#28bbbb] text-white font-semibold cursor-pointer">
             Apply Filters
           </button>
         </div>

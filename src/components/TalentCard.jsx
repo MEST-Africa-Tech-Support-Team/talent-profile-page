@@ -11,7 +11,7 @@ export default function TalentCard({ name, role, image, onViewProfile, skills = 
 
       {/* Availability Status with Green Dot */}
       <div className="flex items-center text-sm text-gray-600 mb-3"> {/* Added mb-3 for spacing */}
-        <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+        <span className="w-2 h-2 bg-[#00CA9B] rounded-full mr-1"></span>
         <span>Available - Full-time</span>
       </div>
 

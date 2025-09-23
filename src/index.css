@@ -12,8 +12,22 @@
     /* Colors */
     --color-primary-100: #28BBBB;
     --color-secondary: #333333;
-    --color-accent: #FF9900;
+    --color-accent: #FF6221;
     --yellow-color: #FF6221;
+
+    /* 
+    Lead Colors
+    #28bbbb - Primary Green
+    #333333 - black
+
+    Supporting Colors 
+    #b627a1 - purple
+    #ffbc45 - yellow
+    #ff6221 - orange
+    #00ca9b - secondary green
+    #949494 - ash
+
+    */
 
     /* Others */
     --border-radius: 12px;

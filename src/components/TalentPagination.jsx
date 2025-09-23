@@ -15,7 +15,7 @@ export default function TalentPagination({ currentPage, totalPages, onPageChange
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-1 text-sm font-medium rounded-md text-gray-700 bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 text-sm font-medium rounded-md text-gray-700 bg-gray-200 disabled:opacity-50 cursor-pointer"
         >
           Previous
         </button>
@@ -25,7 +25,7 @@ export default function TalentPagination({ currentPage, totalPages, onPageChange
           <button
             key={page} // The key is the unique page number
             onClick={() => onPageChange(page)}
-            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors cursor-pointer ${
               currentPage === page
                 ? "bg-[#28BBBB] text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -39,7 +39,7 @@ export default function TalentPagination({ currentPage, totalPages, onPageChange
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-1 text-sm font-medium rounded-md text-gray-700 bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 text-sm font-medium rounded-md text-gray-700 bg-gray-200 disabled:opacity-50 cursor-pointer"
         >
           Next
         </button>
