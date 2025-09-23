@@ -90,7 +90,7 @@ export default function Footer() {
 
       <div className="border-t border-gray-700 mt-10 pt-6 text-center">
         <p className="text-xs sm:text-sm text-gray-400">
-          © MEST 2025. All rights reserved.
+          © MEST Africa 2025. All rights reserved.
         </p>
       </div>
     </footer>
