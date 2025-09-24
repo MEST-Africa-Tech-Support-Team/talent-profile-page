@@ -1,5 +1,5 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube, FaPhoneAlt, FaEnvelope,} from "react-icons/fa";
-import logo from "../assets/images/logo.png";
+// import logo from "../assets/images/logo.png";
 
 export default function Footer() {
   return (
@@ -9,11 +9,15 @@ export default function Footer() {
        
         <div className="flex flex-col items-center md:items-start">
           <div className="flex items-center mb-4">
-            <img src={logo} alt="mest logo" className="h-6" />
+            {/*<img src={logo} alt="mest logo" className="h-6" />*/}
           </div>
-          <p className="text-sm text-gray-300 leading-relaxed max-w-xs md:max-w-none">
-            Empowering the next generation of African entrepreneurs and
-            technologists through world-class education and innovation.
+          {/*<p className="text-sm text-gray-300 leading-relaxed max-w-xs md:max-w-none">*/}
+          {/*  Empowering the next generation of African entrepreneurs and*/}
+          {/*  technologists through world-class education and innovation.*/}
+          {/*</p>*/}
+            <p className="text-sm text-gray-300 leading-relaxed max-w-xs md:max-w-none">
+                Connect with skilled professionals ready to transform your projects and
+                drive innovation forward.
           </p>
         </div>
 
