@@ -4,7 +4,7 @@ export default function TalentCard({ name, role, image, onViewProfile, skills = 
       <img
         src={image}
         alt={name}
-        className="w-24 h-24 rounded-full object-cover mb-3" // Added mb-3 for spacing
+        className="w-24 h-24 rounded-full  mb-3" // Added mb-3 for spacing
       />
       <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
       <p className="text-sm text-gray-500 mb-2">{role}</p> {/* Added mb-2 for spacing */}
