@@ -1,4 +1,4 @@
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube, FaPhoneAlt, FaEnvelope,} from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube, FaPhoneAlt, FaEnvelope, } from "react-icons/fa";
 // import logo from "../assets/images/logo.png";
 
 export default function Footer() {
@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-[#333] text-gray-300 py-10 px-4 sm:px-6 md:px-16 w-full">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
 
-       
+
         <div className="flex flex-col items-center md:items-start">
           <div className="flex items-center mb-4">
             {/*<img src={logo} alt="mest logo" className="h-6" />*/}
@@ -15,36 +15,30 @@ export default function Footer() {
           {/*  Empowering the next generation of African entrepreneurs and*/}
           {/*  technologists through world-class education and innovation.*/}
           {/*</p>*/}
-            <p className="text-sm text-gray-300 leading-relaxed max-w-xs md:max-w-none">
-                Connect with skilled professionals ready to transform your projects and
-                drive innovation forward.
+          <p className="text-sm text-gray-300 leading-relaxed max-w-xs md:max-w-none">
+            Connect with skilled professionals ready to transform your projects and
+            drive innovation forward.
           </p>
         </div>
 
-        
+
         <div className="flex flex-col items-center md:items-start">
           <h3 className="font-semibold text-white mb-4">Contact Information</h3>
 
-         
-          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-4 w-full">
-            <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center mb-2 sm:mb-0">
-              <FaEnvelope className="text-teal-500" />
+          {/* Email */}
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center">
+              <FaEnvelope className="text-teal-500 text-lg" />
             </div>
-            <div className="flex flex-col items-center sm:items-start">
-              <span className="text-xs text-gray-400">Email</span>
-              <p className="text-sm break-all">recruitment.skills@meltwater.org</p>
-            </div>
+            <p className="text-sm break-all">recruitment.skills@meltwater.org</p>
           </div>
 
-          
-          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 w-full">
-            <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center mb-2 sm:mb-0">
-              <FaPhoneAlt className="text-teal-500" />
+          {/* Phone */}
+          <div className="flex items-center space-x-3">
+            <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center">
+              <FaPhoneAlt className="text-teal-500 text-lg" />
             </div>
-            <div className="flex flex-col items-center sm:items-start">
-              <span className="text-xs text-gray-400">Phone</span>
-              <p className="text-sm break-all">+233 5351 87637</p>
-            </div>
+            <p className="text-sm break-all">+233 5351 87637</p>
           </div>
         </div>
 
