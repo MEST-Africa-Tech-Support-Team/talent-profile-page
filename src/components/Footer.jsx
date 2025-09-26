@@ -23,30 +23,32 @@ export default function Footer() {
 
         
         <div className="flex flex-col items-center md:items-start">
-          <h3 className="font-semibold text-white mb-4">Contact Information</h3>
+      <h3 className="font-semibold text-white mb-4 text-center md:text-left">
+        Contact Information
+      </h3>
 
-         
-          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-4 w-full">
-            <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center mb-2 sm:mb-0">
-              <FaEnvelope className="text-teal-500" />
-            </div>
-            <div className="flex flex-col items-center sm:items-start">
-              <span className="text-xs text-gray-400">Email</span>
-              <p className="text-sm break-all">recruitment.skills@meltwater.org</p>
-            </div>
-          </div>
-
-          
-          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 w-full">
-            <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center mb-2 sm:mb-0">
-              <FaPhoneAlt className="text-teal-500" />
-            </div>
-            <div className="flex flex-col items-center sm:items-start">
-              <span className="text-xs text-gray-400">Phone</span>
-              <p className="text-sm break-all">+233 5351 87637</p>
-            </div>
-          </div>
+      
+      <div className="flex items-center mb-4">
+        <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center mr-2">
+          <FaEnvelope className="text-teal-500" />
         </div>
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <span className="text-xs text-gray-400">Email</span>
+          <p className="text-sm break-all">recruitment.skills@meltwater.org</p>
+        </div>
+      </div>
+
+      
+      <div className="flex items-center">
+        <div className="bg-[rgba(40,187,187,0.20)] p-2 rounded-lg flex justify-center items-center mr-2">
+          <FaPhoneAlt className="text-teal-500" />
+        </div>
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <span className="text-xs text-gray-400">Phone</span>
+          <p className="text-sm break-all">+233 5351 87637</p>
+        </div>
+      </div>
+    </div>
 
 
         <div className="flex flex-col items-center md:items-start">
