@@ -1,3 +1,4 @@
+// Original code without page tracking
 // import {
 //   createBrowserRouter,
 //   RouterProvider,
@@ -20,24 +21,46 @@
 //   )
 // }
 
-import {
-	createBrowserRouter,
-	RouterProvider,
-} from "react-router";
-// import { useLocation } from "react-router";
+
+// Code to add page tracking with ReactGA
+
+// import {
+// 	createBrowserRouter,
+// 	RouterProvider,
+// } from "react-router";
+// // import { useLocation } from "react-router";
+// import TalentsPage from "./pages/Home";
+// import usePageTracking from "./hooks/usePageTracking";
+//
+// const talentAppRouter = createBrowserRouter([
+// 	{ path: "/", element: <TalentsPage /> },
+// 	// { path: "*", element: <NotFound /> }
+// ]);
+//
+// function AppContent() {
+// 	usePageTracking(); // 👈 Tracks every route change
+// 	return <RouterProvider router={talentAppRouter} />;
+// }
+//
+// export default function App() {
+// 	return <AppContent />;
+// }
+
+// Code to fix error
+import { createBrowserRouter, RouterProvider } from "react-router";
 import TalentsPage from "./pages/Home";
-import usePageTracking from "./hooks/usePageTracking";
+import Layout from "./components/Layout"; // adjust path if needed
 
 const talentAppRouter = createBrowserRouter([
-	{ path: "/", element: <TalentsPage /> },
-	// { path: "*", element: <NotFound /> }
+	{
+		element: <Layout />,   // 👈 wrap routes in Layout
+		children: [
+			{ path: "/", element: <TalentsPage /> },
+			// { path: "*", element: <NotFound /> }
+		]
+	}
 ]);
 
-function AppContent() {
-	usePageTracking(); // 👈 Tracks every route change
-	return <RouterProvider router={talentAppRouter} />;
-}
-
 export default function App() {
-	return <AppContent />;
+	return <RouterProvider router={talentAppRouter} />;
 }
