@@ -5,3 +5,4 @@ export default function Layout() {
 	usePageTracking(); // 👈 this will now be inside Router context
 	return <Outlet />;
 }
+
