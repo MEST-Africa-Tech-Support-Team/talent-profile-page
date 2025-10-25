@@ -6,7 +6,7 @@ const skillsList = ["ReactJS", "Node.js", "Css 3", "HTML5", "Tailwind", "Javascr
 const rolesList = ["Backend", "Frontend", "Fullstack"];
 // const availabilityList = ["Available", "Full-time", "Part-time", "Contract"];
 const availabilityList = ["Yes", "No"];
-const cohortsList = ["Cohort 4", "Cohort 5"]; // Example cohorts
+const cohortsList = ["Cohort 4", "Cohort 5" , "Cohort 6"]; // Example cohorts
 
 export default function FilterSidebar({ filters, setFilters, onClose }) {
   // Use a local state to manage changes before applying
