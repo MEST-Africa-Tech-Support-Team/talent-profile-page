@@ -5,7 +5,7 @@ import TalentCards from "../components/TalentCards";
 import TalentPagination from "../components/TalentPagination";
 import ViewTalentProfileModal from "../components/viewTalentProfileModal";
 import { apiClient } from "../../api/client";
-import FilterSidebar from "../components/FilterSidebar"; // 👈 import
+import FilterSidebar from "../components/FilterSidebar";
 import Banner from "../components/Banner";
 
 export default function TalentsPage() {
@@ -19,13 +19,11 @@ export default function TalentsPage() {
   const [talentProfile, setTalentProfile] = useState(null);
   const [isModalLoading, setIsModalLoading] = useState(false);
 
-  // Sidebar state 👇
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
 
-  // Filters state with searchField
   const [filters, setFilters] = useState({
     search: "",
-    searchField: "name", // default search type
+    searchField: "name",
     skills: [],
     roles: [],
     availability: null,
@@ -44,7 +42,6 @@ export default function TalentsPage() {
       params[field] = filters.search.trim();
     }
 
-    // Extra filters
     if (filters.skills?.length > 0) params.skills = filters.skills.join(",");
     if (filters.roles?.length > 0) params.role = filters.roles.join(",");
     if (filters.availability) params.availability = filters.availability;
@@ -58,10 +55,19 @@ export default function TalentsPage() {
       .then((response) => {
         const portfolios = response.data.portfolios || response.data;
         if (Array.isArray(portfolios)) {
-          // ✅ sort alphabetically by "name"
-          const sortedPortfolios = [...portfolios].sort((a, b) =>
-            a.name.localeCompare(b.name)
-          );
+          // ✅ Sort by cohort first (Cohort 6 first), then alphabetically by name
+          const sortedPortfolios = [...portfolios].sort((a, b) => {
+            // Get cohort values
+            const cohortA = a.cohort || "";
+            const cohortB = b.cohort || "";
+            
+            // Prioritize Cohort 6
+            if (cohortA === "Cohort 6" && cohortB !== "Cohort 6") return -1;
+            if (cohortA !== "Cohort 6" && cohortB === "Cohort 6") return 1;
+            
+            // If both are Cohort 6 or both are not, sort alphabetically by name
+            return a.name.localeCompare(b.name);
+          });
 
           setTalents(sortedPortfolios);
           setTotalPages(Math.ceil(sortedPortfolios.length / talentsPerPage));
@@ -79,7 +85,6 @@ export default function TalentsPage() {
       .finally(() => setIsLoading(false));
   }, [filters, talentsPerPage]);
 
-  // Trigger fetch on filters change
   useEffect(() => {
     const handler = setTimeout(() => {
       fetchTalents();
@@ -87,7 +92,6 @@ export default function TalentsPage() {
     return () => clearTimeout(handler);
   }, [fetchTalents]);
 
-  // Fetch full profile when a card is clicked
   useEffect(() => {
     if (selectedTalent) {
       setIsModalLoading(true);
@@ -111,49 +115,44 @@ export default function TalentsPage() {
       <Banner />
 
       <div className="min-h-[100vh] px-4 bg-white">
-        {/* Search + Select + Filter button */}
         <div className="my-8 flex flex-col md:flex-row gap-4 items-center justify-center max-w-4xl mx-auto">
-          {/* Search */}  
-<div className="relative flex-1 w-full md:max-w-md">
-  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-    <svg
-      className="h-5 w-5 text-gray-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-      />
-    </svg>
-  </div>
+          <div className="relative flex-1 w-full md:max-w-md">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
 
-  {/* ✅ Dynamic placeholder with examples */}
-  <input
-    type="text"
-    placeholder={
-      {
-        name: "Search talents by name (e.g. Abdul Gafar Issah)",
-        skills: "Search talents by skill (e.g. React.js, Node.js)",
-        role: "Search talents by role (e.g. Frontend, Backend, Fullstack)",
-      }[filters.searchField] || "Search talents"
-    }
-    value={filters.search}
-    onChange={(e) =>
-      setFilters((prev) => ({
-        ...prev,
-        search: e.target.value,
-      }))
-    }
-    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-100)] text-gray-900 placeholder-gray-500"
-  />
-</div>
+            <input
+              type="text"
+              placeholder={
+                {
+                  name: "Search talents by name (e.g. Abdul Gafar Issah)",
+                  skills: "Search talents by skill (e.g. React.js, Node.js)",
+                  role: "Search talents by role (e.g. Frontend, Backend, Fullstack)",
+                }[filters.searchField] || "Search talents"
+              }
+              value={filters.search}
+              onChange={(e) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  search: e.target.value,
+                }))
+              }
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-100)] text-gray-900 placeholder-gray-500"
+            />
+          </div>
 
-
-          {/* Select */}
           <div className="relative">
             <select
               value={filters.searchField}
@@ -186,7 +185,6 @@ export default function TalentsPage() {
             </div>
           </div>
 
-          {/* Filter Button */}
           <button
             onClick={() => setIsFilterSidebarOpen(true)}
             className="px-6 py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow transition-all cursor-pointer"
@@ -226,7 +224,6 @@ export default function TalentsPage() {
         isLoading={isModalLoading}
       />
 
-      {/* Sidebar for filters */}
       {isFilterSidebarOpen && (
         <FilterSidebar
           filters={filters}
