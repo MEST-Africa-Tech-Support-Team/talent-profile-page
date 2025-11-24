@@ -31,9 +31,5 @@
     "globals": "^16.4.0",
     "tailwindcss": "^4.1.13",
     "vite": "^7.1.6"
-  },
-  "overrides": {
-  "rollup": "4.21.0"
-}
-
+  }
 }
