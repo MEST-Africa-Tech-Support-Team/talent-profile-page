@@ -1,3 +1,4 @@
+// Original code including Cohort 6 talents
 // import { useEffect, useState, useCallback } from "react";
 // import PageWrapper from "../components/PageWrapper";
 // import Footer from "../components/Footer";
@@ -236,6 +237,7 @@
 // }
 
 
+// Fitered out the Cohort 6 talents from the API response
 import { useEffect, useState, useCallback } from "react";
 import PageWrapper from "../components/PageWrapper";
 import Footer from "../components/Footer";
