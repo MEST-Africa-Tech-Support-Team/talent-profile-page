@@ -317,7 +317,7 @@ export default function TalentsPage() {
                 console.error("Failed to fetch talents:", err);
                 setError(
                     err.message === "All talents are from Cohort 6."
-                        ? "All available talents are from Cohort 6, which is currently filtered out."
+                        ? "Cohort 6 talents are not available for this search. Please try a different Cohort"
                         : "No talent with the specified criteria was found. Please try different search options."
                 );
                 setTalents([]);
