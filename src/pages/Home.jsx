@@ -1,4 +1,4 @@
-// Original code including Cohort 6 talents
+// Original code including Cohort 6 talents and filtering by alphabetical order
 import { useEffect, useState, useCallback } from "react";
 import PageWrapper from "../components/PageWrapper";
 import Footer from "../components/Footer";
