@@ -50,12 +50,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import TalentsPage from "./pages/Home";
 import Layout from "./components/Layout"; // adjust path if needed
+import Projects from "./components/ProjectPage";
 
 const talentAppRouter = createBrowserRouter([
 	{
 		element: <Layout />,   // 👈 wrap routes in Layout
 		children: [
 			{ path: "/", element: <TalentsPage /> },
+			{ path: "/projects", element: <ProjectPage /> },
+			
 			// { path: "*", element: <NotFound /> }
 		]
 	}
