@@ -48,18 +48,6 @@ const ProjectCard = ({ project }) => {
             <span className="text-gray-500 dark:text-gray-400 text-sm">No preview available</span>
           </div>
         )}
-        
-        {/* Tech Stack Badges */}
-        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1.5">
-          {project.techStack?.map((tech, index) => (
-            <span 
-              key={index} 
-              className="px-2 py-0.5 bg-black/70 text-white text-[10px] font-medium rounded-full backdrop-blur-sm"
-            >
-              {tech.trim()}
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* Content Section */}
@@ -71,6 +59,20 @@ const ProjectCard = ({ project }) => {
           <p className="mt-1 text-gray-600 dark:text-gray-300 line-clamp-2">
             {project.description || 'No description provided'}
           </p>
+          
+          {/* Tech Stack Badges */}
+          {project.techStack && project.techStack.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {project.techStack.map((tech, index) => (
+                <span 
+                  key={index} 
+                  className="px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full border border-blue-200 dark:border-blue-700"
+                >
+                  {tech.trim()}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Links Section */}
