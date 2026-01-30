@@ -59,37 +59,37 @@ const handleClearAll = () => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-black/30 backdrop-blur-sm bg-opacity-50">
-      <div className="absolute right-0 top-0 h-full w-80 max-w-full bg-white p-6 shadow-lg transform transition-transform duration-300 ease-in-out translate-x-0">
+      <div className="absolute right-0 top-0 h-full w-full sm:w-96 max-w-full bg-white p-4 sm:p-6 shadow-lg transform transition-transform duration-300 ease-in-out translate-x-0 overflow-y-auto">
         <div className="flex items-center justify-between pb-4 border-b border-gray-200">
-          <h2 className="text-2xl font-bold">Filters</h2>
+          <h2 className="text-xl sm:text-2xl font-bold">Filters</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700 cursor-pointer">
             <X size={24} />
           </button>
         </div>
 
         {/* Search within sidebar */}
-        <div className="relative mt-6 mb-6">
+        <div className="relative mt-4 sm:mt-6 mb-4 sm:mb-6">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
           <input
             type="text"
             placeholder="Search talents by name..."
-            className="w-full pl-10 pr-4 py-2 text-gray-900 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full pl-10 pr-4 py-2 text-sm sm:text-base text-gray-900 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
             value={localFilters.search}
             onChange={(e) => setLocalFilters({ ...localFilters, search: e.target.value })}
           />
         </div>
 
         {/* All Filter Sections */}
-        <div className="flex flex-col gap-6 overflow-y-auto flex-1">
+        <div className="flex flex-col gap-4 sm:gap-6 overflow-y-auto flex-1">
           {/* Skills Filter Section */}
           <div>
-            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Skills</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Skills</h3>
             <div className="flex flex-wrap gap-2">
               {skillsList.map((skill) => (
                 <span
                   key={skill}
                   onClick={() => handleArrayChange("skills", skill)}
-                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                     localFilters.skills.includes(skill)
                       ? "bg-[#28bbbb] text-white"
                       : "bg-[#949494] text-[#fff] "
@@ -103,13 +103,13 @@ const handleClearAll = () => {
 
           {/* Roles Filter Section */}
           <div>
-            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Roles</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Roles</h3>
             <div className="flex flex-wrap gap-2">
               {rolesList.map((role) => (
                 <span
                   key={role}
                   onClick={() => handleArrayChange("roles", role)}
-                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                     localFilters.roles.includes(role)
                        ? "bg-[#28bbbb] text-white"
                       : "bg-[#949494] text-[#fff] "
@@ -123,13 +123,13 @@ const handleClearAll = () => {
 
           {/* Availability Filter Section */}
           <div>
-            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Availability</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Availability</h3>
             <div className="flex flex-wrap gap-2">
               {availabilityList.map((availability) => (
                 <span
                   key={availability}
                   onClick={() => handleSingleSelectChange("availability", availability)}
-                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors  ${
+                  className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors  ${
                     localFilters.availability === availability
                        ? "bg-[#28bbbb] text-white"
                       : "bg-[#949494] text-[#fff] "
@@ -142,14 +142,14 @@ const handleClearAll = () => {
           </div>
 
           {/* Cohort Filter Section */}
-          <div className="mb-8">
-            <h3 className="font-semibold text-lg mb-2 text-[#333333]">Cohort</h3>
+          <div className="mb-6 sm:mb-8">
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Cohort</h3>
             <div className="flex flex-wrap gap-2">
               {cohortsList.map((cohort) => (
                 <span
                   key={cohort}
                   onClick={() => handleSingleSelectChange("cohort", cohort)}
-                  className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors  ${
+                  className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors  ${
                     localFilters.cohort === cohort
                       ? "bg-[#28bbbb] text-white"
                       : "bg-[#949494] text-[#fff] "
@@ -163,11 +163,11 @@ const handleClearAll = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="p-6 flex justify-between items-center border-t border-gray-200">
+        <div className="p-4 sm:p-6 flex justify-between items-center border-t border-gray-200 sticky bottom-0 bg-white -mx-4 sm:-mx-6">
           <button onClick={handleClearAll} className="text-sm font-semibold text-[#ff6221] hover:underline cursor-pointer">
             Clear All
           </button>
-          <button onClick={handleApplyFilters} className="px-6 py-2 rounded-lg bg-[#28bbbb] text-white font-semibold cursor-pointer">
+          <button onClick={handleApplyFilters} className="px-4 sm:px-6 py-2 rounded-lg bg-[#28bbbb] text-white text-sm sm:text-base font-semibold cursor-pointer hover:bg-[#239999] transition-colors">
             Apply Filters
           </button>
         </div>

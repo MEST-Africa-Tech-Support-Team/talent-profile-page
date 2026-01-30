@@ -1,7 +1,6 @@
 // Original code including Cohort 6 talents and filtering by alphabetical order
 import { useEffect, useState, useCallback } from "react";
 import PageWrapper from "../components/PageWrapper";
-import Footer from "../components/Footer";
 import TalentCards from "../components/TalentCards";
 import TalentPagination from "../components/TalentPagination";
 import ViewTalentProfileModal from "../components/viewTalentProfileModal";
@@ -115,9 +114,9 @@ export default function TalentsPage() {
     <PageWrapper className="bg-white">
       <Banner />
 
-      <div className="min-h-[100vh] px-4 bg-white">
-        <div className="my-8 flex flex-col md:flex-row gap-4 items-center justify-center max-w-4xl mx-auto">
-          <div className="relative flex-1 w-full md:max-w-md">
+      <div className="min-h-[100vh] px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="my-6 sm:my-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center max-w-4xl mx-auto">
+          <div className="relative flex-1 w-full sm:max-w-md">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
                 className="h-5 w-5 text-gray-400"
@@ -150,11 +149,11 @@ export default function TalentsPage() {
                   search: e.target.value,
                 }))
               }
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-100)] text-gray-900 placeholder-gray-500"
+              className="w-full pl-10 pr-4 py-2.5 sm:py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-primary-100)] text-sm sm:text-base text-gray-900 placeholder-gray-500"
             />
           </div>
 
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <select
               value={filters.searchField}
               onChange={(e) =>
@@ -163,7 +162,7 @@ export default function TalentsPage() {
                   searchField: e.target.value,
                 }))
               }
-              className="appearance-none bg-white border border-gray-200 rounded-xl px-4 py-3 pr-8 shadow-sm text-gray-700 font-medium cursor-pointer transition-all duration-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]"
+              className="appearance-none bg-white border border-gray-200 rounded-xl px-4 py-2.5 sm:py-3 pr-8 sm:pr-10 shadow-sm text-gray-700 text-sm sm:text-base font-medium cursor-pointer transition-all duration-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)] w-full sm:w-auto"
             >
               <option value="name">Search by Name</option>
               <option value="role">Search by Role</option>
@@ -188,7 +187,7 @@ export default function TalentsPage() {
 
           <button
             onClick={() => setIsFilterSidebarOpen(true)}
-            className="px-6 py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow transition-all cursor-pointer"
+            className="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow transition-all cursor-pointer hover:bg-[#239999] text-sm sm:text-base"
           >
             Filter
           </button>
@@ -212,8 +211,6 @@ export default function TalentsPage() {
           </>
         )}
       </div>
-
-      <Footer />
 
       <ViewTalentProfileModal
         isOpen={!!selectedTalent}
