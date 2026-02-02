@@ -12,42 +12,39 @@ export default function Navbar() {
 					<div className="flex-shrink-0">
 						<span className="text-lg sm:text-xl font-bold text-gray-800">Talent Connect</span>
 					</div>
-					
+
 					{/* Desktop Navigation */}
 					<div className="hidden md:flex space-x-4 lg:space-x-8">
 						<NavLink
 							to="/"
 							className={({ isActive }) =>
-								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-									isActive
-										? "text-blue-600 bg-blue-50"
-										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+									? "text-blue-600 bg-blue-50"
+									: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 								}`
 							}
 						>
 							Home
 						</NavLink>
-						
+
 						<NavLink
 							to="/projects"
 							className={({ isActive }) =>
-								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-									isActive
-										? "text-blue-600 bg-blue-50"
-										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+									? "text-blue-600 bg-blue-50"
+									: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 								}`
 							}
 						>
 							Projects
 						</NavLink>
-						
+
 						<NavLink
 							to="#"
-							className={({ isActive }) =>
-								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-									isActive
-										? "text-blue-600 bg-blue-50"
-										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+							className={({ isPending }) =>
+								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isPending
+									? "text-blue-600 bg-blue-50"
+									: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 								}`
 							}
 						>
@@ -74,38 +71,35 @@ export default function Navbar() {
 								to="/"
 								onClick={() => setIsMenuOpen(false)}
 								className={({ isActive }) =>
-									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-										isActive
-											? "text-blue-600 bg-blue-50"
-											: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+										? "text-blue-600 bg-blue-50"
+										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 									}`
 								}
 							>
 								Home
 							</NavLink>
-							
+
 							<NavLink
 								to="/projects"
 								onClick={() => setIsMenuOpen(false)}
 								className={({ isActive }) =>
-									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-										isActive
-											? "text-blue-600 bg-blue-50"
-											: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+										? "text-blue-600 bg-blue-50"
+										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 									}`
 								}
 							>
 								Projects
 							</NavLink>
-							
+
 							<NavLink
 								to="#"
 								onClick={() => setIsMenuOpen(false)}
-								className={({ isActive }) =>
-									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-										isActive
-											? "text-blue-600 bg-blue-50"
-											: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+								className={({ isPending }) =>
+									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isPending
+										? "text-blue-600 bg-blue-50"
+										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 									}`
 								}
 							>
