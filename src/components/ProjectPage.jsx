@@ -13,10 +13,21 @@ const Projects = () => {
     const [error, setError] = useState(null);
     const [showFilterSidebar, setShowFilterSidebar] = useState(false);
     const [filters, setFilters] = useState({
-        search: "",
+        category: "",
         projectTypes: [],
         techStack: [],
     });
+
+    const categories = [
+        "E-commerce",
+        "FinTech",
+        "SaaS",
+        "EdTech",
+        "AI/ML",
+        "Health Fitness",
+        "Open Source",
+        "Marketing"
+    ];
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -44,16 +55,12 @@ const Projects = () => {
     // Filter and search projects
     const filteredProjects = useMemo(() => {
         return projects.filter((project) => {
-            // Search filter (searches in title, description, and tech stack)
-            if (filters.search) {
-                const searchLower = filters.search.toLowerCase();
-                const matchesSearch = 
-                    project.title?.toLowerCase().includes(searchLower) ||
-                    project.description?.toLowerCase().includes(searchLower) ||
-                    project.techStack?.some(tech => tech.toLowerCase().includes(searchLower)) ||
-                    project.createdBy?.some(creator => creator.toLowerCase().includes(searchLower));
-                
-                if (!matchesSearch) return false;
+            // Category filter
+            if (filters.category) {
+                const projectCategory = project.category || project.projectType || "";
+                if (projectCategory.toLowerCase() !== filters.category.toLowerCase()) {
+                    return false;
+                }
             }
 
             // Project type filter
@@ -118,7 +125,7 @@ const Projects = () => {
     return (
         <PageWrapper className="bg-white">
             {/* Banner Section */}
-            <section className="bg-[#28BBBB] text-white px-4 sm:px-6 md:px-10 py-6 sm:py-8 text-center min-h-[40vh] sm:min-h-[50vh] flex flex-col justify-center">
+            <section className="bg-primary-100 text-white px-4 sm:px-6 md:px-10 py-6 sm:py-8 text-center min-h-[40vh] sm:min-h-[50vh] flex flex-col justify-center">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4 font-bold mt-4 sm:mt-6 leading-snug">
                     Discover Amazing <br className="hidden sm:block" /> Projects
                 </h1>
@@ -128,41 +135,45 @@ const Projects = () => {
                 </p>
             </section>
 
-            <div className="min-h-[100vh] px-4 sm:px-6 lg:px-8 bg-white">
-                {/* Search and Filter Bar */}
-                <div className="my-6 sm:my-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center max-w-4xl mx-auto">
-                    {/* Search Bar */}
-                    <div className="relative flex-1 w-full sm:max-w-md">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg
-                                className="h-5 w-5 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+            <div className="min-h-screen px-4 sm:px-6 lg:px-8 bg-white">
+                {/* Category Tabs */}
+                <div className="my-6 sm:my-8">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex flex-wrap gap-2 sm:gap-3 justify-center items-center">
+                            <button
+                                onClick={() => setFilters({ ...filters, category: "" })}
+                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all ${
+                                    filters.category === ""
+                                        ? "bg-primary-100 text-white shadow-md"
+                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                }`}
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                            </svg>
+                                All Projects
+                            </button>
+                            {categories.map((category) => (
+                                <button
+                                    key={category}
+                                    onClick={() => setFilters({ ...filters, category })}
+                                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all ${
+                                        filters.category === category
+                                            ? "bg-primary-100 text-white shadow-md"
+                                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                    }`}
+                                >
+                                    {category}
+                                </button>
+                            ))}
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Search projects by title, description, or tech stack..."
-                            className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#28BBBB] text-gray-900 placeholder-gray-500"
-                            value={filters.search}
-                            onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                        />
                     </div>
+                </div>
 
-                    {/* Filter Button */}
+                {/* Filter Button */}
+                <div className="mb-6 flex justify-center">
                     <button
                         onClick={() => setShowFilterSidebar(true)}
-                        className="relative px-6 py-3 rounded-xl bg-[#28BBBB] text-white font-semibold shadow transition-all cursor-pointer hover:bg-[#239999]"
+                        className="relative px-6 py-3 rounded-xl bg-primary-100 text-white font-semibold shadow transition-all cursor-pointer hover:bg-primary-200"
                     >
-                        Filter
+                        Additional Filters
                         {activeFiltersCount > 0 && (
                             <span className="absolute -top-2 -right-2 bg-[#ff6221] text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
                                 {activeFiltersCount}
@@ -172,9 +183,20 @@ const Projects = () => {
                 </div>
 
                 {/* Active Filters Display */}
-                {(filters.projectTypes.length > 0 || filters.techStack.length > 0) && (
+                {(filters.category || filters.projectTypes.length > 0 || filters.techStack.length > 0) && (
                     <div className="mb-6 flex flex-wrap gap-2 items-center max-w-7xl mx-auto">
                         <span className="text-xs sm:text-sm font-semibold text-gray-700">Active filters:</span>
+                        {filters.category && (
+                            <span className="px-2.5 sm:px-3 py-1 bg-primary-100 text-white text-xs sm:text-sm rounded-full flex items-center gap-2">
+                                Category: {filters.category}
+                                <button
+                                    onClick={() => setFilters({ ...filters, category: "" })}
+                                    className="hover:text-gray-200 transition-colors"
+                                >
+                                    ×
+                                </button>
+                            </span>
+                        )}
                         {filters.projectTypes.map((type) => (
                             <span
                                 key={type}
@@ -210,7 +232,7 @@ const Projects = () => {
                             </span>
                         ))}
                         <button
-                            onClick={() => setFilters({ search: filters.search, projectTypes: [], techStack: [] })}
+                            onClick={() => setFilters({ category: "", projectTypes: [], techStack: [] })}
                             className="text-xs sm:text-sm text-[#ff6221] hover:underline font-semibold"
                         >
                             Clear all filters
@@ -228,14 +250,14 @@ const Projects = () => {
                     <div className="flex items-center justify-center min-h-[400px]">
                         <div className="text-center">
                             <p className="text-gray-600 text-lg">
-                                {filters.search || activeFiltersCount > 0 
-                                    ? "No projects match your search or filters" 
+                                {filters.category || activeFiltersCount > 0 
+                                    ? "No projects match your filters" 
                                     : "No projects found"
                                 }
                             </p>
-                            {(filters.search || activeFiltersCount > 0) && (
+                            {(filters.category || activeFiltersCount > 0) && (
                                 <button
-                                    onClick={() => setFilters({ search: "", projectTypes: [], techStack: [] })}
+                                    onClick={() => setFilters({ category: "", projectTypes: [], techStack: [] })}
                                     className="mt-4 px-4 py-2 bg-[#28bbbb] text-white rounded-lg hover:bg-[#239999] transition-colors"
                                 >
                                     Clear filters
@@ -244,7 +266,7 @@ const Projects = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="max-w-7xl mx-auto">
+                    <div className="max-w-7xl mx-auto pb-16 sm:pb-20">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                             {filteredProjects.map((project) => (
                                 <ProjectCard key={project.id} project={project} />
@@ -253,8 +275,6 @@ const Projects = () => {
                     </div>
                 )}
             </div>
-
-            {/* <Footer /> */}
 
             {/* Filter Sidebar */}
             {showFilterSidebar && (
