@@ -12,21 +12,24 @@ const Projects = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showFilterSidebar, setShowFilterSidebar] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState({
         category: "",
         projectTypes: [],
         techStack: [],
     });
 
+    const projectsPerPage = 18; // 6 rows * 3 columns
+
     const categories = [
-        "E-commerce",
-        "FinTech",
-        "SaaS",
-        "EdTech",
-        "AI/ML",
-        "Health Fitness",
-        "Open Source",
-        "Marketing"
+        { value: "ECOMMERCE", label: "E-commerce" },
+        { value: "FINTECH", label: "FinTech" },
+        { value: "SAAS_PRODUCTIVITY", label: "SaaS" },
+        { value: "EDTECH", label: "EdTech" },
+        { value: "AI_MACHINE_LEARNING", label: "AI/ML" },
+        { value: "HEALTH_FITNESS", label: "Health Fitness" },
+        { value: "OPEN_SOURCE", label: "Open Source" },
+        { value: "MARKERTING", label: "Marketing" }
     ];
 
     useEffect(() => {
@@ -55,15 +58,15 @@ const Projects = () => {
     // Filter and search projects
     const filteredProjects = useMemo(() => {
         return projects.filter((project) => {
-            // Category filter
+            // Category filter (from tabs)
             if (filters.category) {
-                const projectCategory = project.category || project.projectType || "";
-                if (projectCategory.toLowerCase() !== filters.category.toLowerCase()) {
+                const projectType = project.projectType || "";
+                if (projectType !== filters.category) {
                     return false;
                 }
             }
 
-            // Project type filter
+            // Project type filter (from additional filters)
             if (filters.projectTypes.length > 0) {
                 if (!filters.projectTypes.includes(project.projectType)) {
                     return false;
@@ -84,6 +87,35 @@ const Projects = () => {
             return true;
         });
     }, [projects, filters]);
+
+    // Pagination calculations
+    const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+    const indexOfLastProject = currentPage * projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+    const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filters]);
+
+    // Pagination handlers
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            handlePageChange(currentPage - 1);
+        }
+    };
+
+    const handleNext = () => {
+        if (currentPage < totalPages) {
+            handlePageChange(currentPage + 1);
+        }
+    };
 
     // Count active filters
     const activeFiltersCount = filters.projectTypes.length + filters.techStack.length;
@@ -142,7 +174,7 @@ const Projects = () => {
                         <div className="flex flex-wrap gap-2 sm:gap-3 justify-center items-center">
                             <button
                                 onClick={() => setFilters({ ...filters, category: "" })}
-                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all ${
+                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm transition-all ${
                                     filters.category === ""
                                         ? "bg-primary-100 text-white shadow-md"
                                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -152,35 +184,46 @@ const Projects = () => {
                             </button>
                             {categories.map((category) => (
                                 <button
-                                    key={category}
-                                    onClick={() => setFilters({ ...filters, category })}
-                                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all ${
-                                        filters.category === category
+                                    key={category.value}
+                                    onClick={() => setFilters({ ...filters, category: category.value })}
+                                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm font-semibold transition-all ${
+                                        filters.category === category.value
                                             ? "bg-primary-100 text-white shadow-md"
                                             : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                     }`}
                                 >
-                                    {category}
+                                    {category.label}
                                 </button>
                             ))}
+                            <button
+                        onClick={() => setShowFilterSidebar(true)}
+                        className="relative px-6 py-3 rounded-lg text-sm bg-primary-100 text-white font-semibold shadow transition-all cursor-pointer hover:bg-primary-200"
+                    >
+                        Filters
+                        {activeFiltersCount > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-[#ff6221] text-white text-xs font-semibold rounded-full w-6 h-6 flex items-center justify-center">
+                                {activeFiltersCount}
+                            </span>
+                        )}
+                    </button>
                         </div>
                     </div>
                 </div>
 
                 {/* Filter Button */}
-                <div className="mb-6 flex justify-center">
+                {/* <div className="mb-6 flex justify-center">
                     <button
                         onClick={() => setShowFilterSidebar(true)}
-                        className="relative px-6 py-3 rounded-xl bg-primary-100 text-white font-semibold shadow transition-all cursor-pointer hover:bg-primary-200"
+                        className="relative px-6 py-3 rounded-lg text-sm bg-primary-100 text-white font-semibold shadow transition-all cursor-pointer hover:bg-primary-200"
                     >
-                        Additional Filters
+                        Filters
                         {activeFiltersCount > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-[#ff6221] text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                            <span className="absolute -top-2 -right-2 bg-[#ff6221] text-white text-xs font-semibold rounded-full w-6 h-6 flex items-center justify-center">
                                 {activeFiltersCount}
                             </span>
                         )}
                     </button>
-                </div>
+                </div> */}
 
                 {/* Active Filters Display */}
                 {(filters.category || filters.projectTypes.length > 0 || filters.techStack.length > 0) && (
@@ -188,7 +231,7 @@ const Projects = () => {
                         <span className="text-xs sm:text-sm font-semibold text-gray-700">Active filters:</span>
                         {filters.category && (
                             <span className="px-2.5 sm:px-3 py-1 bg-primary-100 text-white text-xs sm:text-sm rounded-full flex items-center gap-2">
-                                Category: {filters.category}
+                                Category: {categories.find(c => c.value === filters.category)?.label || filters.category}
                                 <button
                                     onClick={() => setFilters({ ...filters, category: "" })}
                                     className="hover:text-gray-200 transition-colors"
@@ -242,7 +285,7 @@ const Projects = () => {
 
                 {/* Results Count */}
                 <div className="mb-4 text-sm sm:text-base text-gray-600 max-w-7xl mx-auto px-2">
-                    Showing {filteredProjects.length} of {projects.length} projects
+                    Showing {indexOfFirstProject + 1}-{Math.min(indexOfLastProject, filteredProjects.length)} of {filteredProjects.length} projects
                 </div>
 
                 {/* Projects Grid */}
@@ -268,10 +311,75 @@ const Projects = () => {
                 ) : (
                     <div className="max-w-7xl mx-auto pb-16 sm:pb-20">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                            {filteredProjects.map((project) => (
+                            {currentProjects.map((project) => (
                                 <ProjectCard key={project.id} project={project} />
                             ))}
                         </div>
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <div className="flex justify-center items-center gap-2 mt-12">
+                                <button
+                                    onClick={handlePrevious}
+                                    disabled={currentPage === 1}
+                                    className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                                        currentPage === 1
+                                            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                    }`}
+                                >
+                                    Previous
+                                </button>
+
+                                <div className="flex gap-2">
+                                    {[...Array(totalPages)].map((_, index) => {
+                                        const pageNumber = index + 1;
+                                        // Show first page, last page, current page, and pages around current
+                                        if (
+                                            pageNumber === 1 ||
+                                            pageNumber === totalPages ||
+                                            (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
+                                        ) {
+                                            return (
+                                                <button
+                                                    key={pageNumber}
+                                                    onClick={() => handlePageChange(pageNumber)}
+                                                    className={`w-10 h-10 rounded-lg font-semibold transition-all ${
+                                                        currentPage === pageNumber
+                                                            ? "bg-primary-100 text-white"
+                                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                                    }`}
+                                                >
+                                                    {pageNumber}
+                                                </button>
+                                            );
+                                        } else if (
+                                            pageNumber === currentPage - 2 ||
+                                            pageNumber === currentPage + 2
+                                        ) {
+                                            return (
+                                                <span key={pageNumber} className="flex items-center px-2">
+                                                    ...
+                                                </span>
+                                            );
+                                        }
+                                        return null;
+                                    })}
+                                </div>
+
+                                <button
+                                    onClick={handleNext}
+                                    disabled={currentPage === totalPages}
+                                    className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                                        currentPage === totalPages
+                                            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                    }`}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
