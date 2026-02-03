@@ -97,7 +97,7 @@ export default function ProjectFilterSidebar({ filters, setFilters, onClose }) {
         <div className="flex flex-col gap-4 sm:gap-6 mb-6">
           {/* Project Type Filter Section */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-2 sm:mb-3 text-[#333333] dark:text-gray-200">Project Type</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 sm:mb-3 text-secondary dark:text-gray-200">Project Type</h3>
             <div className="flex flex-wrap gap-2">
               {projectTypesList.map((type) => (
                 <span
@@ -106,7 +106,7 @@ export default function ProjectFilterSidebar({ filters, setFilters, onClose }) {
                   className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                     localFilters.projectTypes.includes(type.value)
                       ? "bg-[#28bbbb] text-white"
-                      : "bg-[#949494] text-[#fff] hover:bg-[#757575]"
+                      : "bg-[#949494] text-white hover:bg-[#757575]"
                   }`}
                 >
                   {type.label}
@@ -117,7 +117,7 @@ export default function ProjectFilterSidebar({ filters, setFilters, onClose }) {
 
           {/* Tech Stack Filter Section */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-2 sm:mb-3 text-[#333333] dark:text-gray-200">Tech Stack</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 sm:mb-3 text-secondary dark:text-gray-200">Tech Stack</h3>
             <div className="flex flex-wrap gap-2">
               {techStackList.map((tech) => (
                 <span
@@ -126,7 +126,7 @@ export default function ProjectFilterSidebar({ filters, setFilters, onClose }) {
                   className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                     localFilters.techStack.includes(tech)
                       ? "bg-[#28bbbb] text-white"
-                      : "bg-[#949494] text-[#fff] hover:bg-[#757575]"
+                      : "bg-[#949494] text-white hover:bg-[#757575]"
                   }`}
                 >
                   {tech}

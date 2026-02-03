@@ -67,19 +67,19 @@ export default function ViewTalentProfileModal({
                 <h3 className="text-sm sm:text-base font-semibold text-gray-900">
                   Brief Summary
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-[#333333] leading-relaxed whitespace-pre-line">
+                <p className="mt-1 text-xs sm:text-sm text-secondary leading-relaxed whitespace-pre-line">
                   {talent.briefSummary}
                 </p>
               </div>
 
               {/* Academic Background */}
               <div className="mt-3 sm:mt-4">
-                <h3 className="text-sm sm:text-base font-semibold text-[#333333]">
+                <h3 className="text-sm sm:text-base font-semibold text-secondary">
                   Academic Background
                 </h3>
                 <div className="mt-2 space-y-3">
                   <div className="border-l-4 border-[#28bbbb] pl-3 py-1 bg-gray-50 rounded">
-                    <p className="text-xs sm:text-sm font-medium text-[#333333] whitespace-pre-line">
+                    <p className="text-xs sm:text-sm font-medium text-secondary. whitespace-pre-line">
                       {talent.educationSummary}
                     </p>
                   </div>
@@ -88,7 +88,7 @@ export default function ViewTalentProfileModal({
 
               {/* Soft Skills */}
               <div className="mt-3 sm:mt-4">
-                <h3 className="text-sm sm:text-base font-semibold text-[#333333]">
+                <h3 className="text-sm sm:text-base font-semibold text-secondary">
                   Soft Skills
                 </h3>
                 <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
@@ -109,7 +109,7 @@ export default function ViewTalentProfileModal({
 
               {/* Technical Skills */}
               <div className="mt-3 sm:mt-4 mb-4 sm:mb-6">
-                <h3 className="text-sm sm:text-base font-semibold text-[#333333]">
+                <h3 className="text-sm sm:text-base font-semibold text-secondary">
                   Technical Skills
                 </h3>
                 <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
@@ -135,7 +135,7 @@ export default function ViewTalentProfileModal({
                 href={talent.portFolio}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1 px-3 py-2 text-xs sm:text-sm bg-[#28BBBB] text-white rounded-lg hover:bg-[#239999] transition-colors"
+                className="flex items-center justify-center gap-1 px-3 py-2 text-xs sm:text-sm bg-primary-100 text-white rounded-lg hover:bg-[#239999] transition-colors"
               >
                 <ExternalLink size={14} className="sm:w-4 sm:h-4" /> Portfolio
               </a>
@@ -144,7 +144,7 @@ export default function ViewTalentProfileModal({
                 href={talent.cv}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1 px-3 py-2 text-xs sm:text-sm bg-[#333333] text-white rounded-lg hover:bg-[#222] transition-colors"
+                className="flex items-center justify-center gap-1 px-3 py-2 text-xs sm:text-sm bg-secondary text-white rounded-lg hover:bg-[#222] transition-colors"
               >
                 <FileDown size={14} className="sm:w-4 sm:h-4" /> View CV
               </a>
@@ -153,7 +153,7 @@ export default function ViewTalentProfileModal({
                 href="https://docs.google.com/forms/d/e/1FAIpQLSdxhUctMBtgOUtREMGZR4OS164OM-EZFQYBHKEpVYM7Tw44TA/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-grow sm:flex-grow-0"
+                className="grow sm:grow-0"
               >
                 <button className="w-full px-3 py-2 text-xs sm:text-sm bg-[#949494] text-white rounded-lg cursor-pointer hover:bg-[#7a7a7a] transition-colors">
                   Hire Talent

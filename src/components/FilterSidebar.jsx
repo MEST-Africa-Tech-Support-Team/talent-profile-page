@@ -83,7 +83,7 @@ const handleClearAll = () => {
         <div className="flex flex-col gap-4 sm:gap-6 overflow-y-auto flex-1">
           {/* Skills Filter Section */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Skills</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-secondary">Skills</h3>
             <div className="flex flex-wrap gap-2">
               {skillsList.map((skill) => (
                 <span
@@ -92,7 +92,7 @@ const handleClearAll = () => {
                   className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                     localFilters.skills.includes(skill)
                       ? "bg-[#28bbbb] text-white"
-                      : "bg-[#949494] text-[#fff] "
+                      : "bg-[#949494] text-white"
                   }`}
                 >
                   {skill}
@@ -103,7 +103,7 @@ const handleClearAll = () => {
 
           {/* Roles Filter Section */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Roles</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-secondary">Roles</h3>
             <div className="flex flex-wrap gap-2">
               {rolesList.map((role) => (
                 <span
@@ -112,7 +112,7 @@ const handleClearAll = () => {
                   className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                     localFilters.roles.includes(role)
                        ? "bg-[#28bbbb] text-white"
-                      : "bg-[#949494] text-[#fff] "
+                      : "bg-[#949494] text-white"
                   }`}
                 >
                   {role}
@@ -123,7 +123,7 @@ const handleClearAll = () => {
 
           {/* Availability Filter Section */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Availability</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-secondary">Availability</h3>
             <div className="flex flex-wrap gap-2">
               {availabilityList.map((availability) => (
                 <span
@@ -132,7 +132,7 @@ const handleClearAll = () => {
                   className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors  ${
                     localFilters.availability === availability
                        ? "bg-[#28bbbb] text-white"
-                      : "bg-[#949494] text-[#fff] "
+                      : "bg-[#949494] text-white"
                   }`}
                 >
                   {availability}
@@ -143,7 +143,7 @@ const handleClearAll = () => {
 
           {/* Cohort Filter Section */}
           <div className="mb-6 sm:mb-8">
-            <h3 className="font-semibold text-base sm:text-lg mb-2 text-[#333333]">Cohort</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2 text-secondary">Cohort</h3>
             <div className="flex flex-wrap gap-2">
               {cohortsList.map((cohort) => (
                 <span
@@ -152,7 +152,7 @@ const handleClearAll = () => {
                   className={`cursor-pointer px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors  ${
                     localFilters.cohort === cohort
                       ? "bg-[#28bbbb] text-white"
-                      : "bg-[#949494] text-[#fff] "
+                      : "bg-[#949494] text-white"
                   }`}
                 >
                   {cohort}
