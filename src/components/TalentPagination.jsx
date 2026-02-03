@@ -26,9 +26,9 @@ export default function TalentPagination({ currentPage, totalPages, onPageChange
             <button
               key={page} // The key is the unique page number
               onClick={() => onPageChange(page)}
-              className={`px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors cursor-pointer flex-shrink-0 ${
+              className={`px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors cursor-pointer shrink-0 ${
                 currentPage === page
-                  ? "bg-[#28BBBB] text-white"
+                  ? "bg-primary-100 text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
