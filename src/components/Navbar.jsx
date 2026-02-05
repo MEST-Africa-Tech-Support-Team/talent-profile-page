@@ -40,9 +40,9 @@ export default function Navbar() {
 						</NavLink>
 
 						<NavLink
-							to="#"
-							className={({ isPending }) =>
-								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isPending
+							to="/testimonials"
+							className={({ isActive }) =>
+								`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
 									? "text-blue-600 bg-blue-50"
 									: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 								}`
@@ -94,10 +94,10 @@ export default function Navbar() {
 							</NavLink>
 
 							<NavLink
-								to="#"
+								to="/testimonials"
 								onClick={() => setIsMenuOpen(false)}
-								className={({ isPending }) =>
-									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isPending
+								className={({ isActive }) =>
+									`px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive
 										? "text-blue-600 bg-blue-50"
 										: "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
 									}`
