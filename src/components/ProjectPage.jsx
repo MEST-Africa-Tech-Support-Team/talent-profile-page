@@ -4,6 +4,8 @@ import ProjectCard from "./ProjectCard";
 import ProjectFilterSidebar from "./ProjectFilterSidebar";
 import { apiClient } from "../../api/client";
 import PageWrapper from "./PageWrapper";
+import { motion } from "framer-motion";
+import ProjectBanner from "./ProjectBanner";
 
 
 const Projects = () => {
@@ -120,22 +122,18 @@ const Projects = () => {
     // Count active filters
     const activeFiltersCount = filters.projectTypes.length + filters.techStack.length;
 
-    if (loading) {
-        return (
-            <PageWrapper>
+   return (
+        <PageWrapper className="bg-white">
+            <ProjectBanner />
+
+            {loading ? (
                 <div className="flex items-center justify-center min-h-[400px]">
                     <div className="text-center">
                         <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
                         <p className="mt-4 text-gray-600 dark:text-gray-400">Loading projects...</p>
                     </div>
                 </div>
-            </PageWrapper>
-        );
-    }
-
-    if (error) {
-        return (
-            <PageWrapper>
+            ) : error ? (
                 <div className="flex items-center justify-center min-h-[400px]">
                     <div className="text-center">
                         <div className="text-red-500 dark:text-red-400 text-lg font-semibold mb-2">
@@ -149,23 +147,8 @@ const Projects = () => {
                             Retry
                         </button>
                     </div>
-                </div>
-            </PageWrapper>
-        );
-    }
-
-    return (
-        <PageWrapper className="bg-white">
-            {/* Banner Section */}
-            <section className="bg-primary-100 text-white px-4 sm:px-6 md:px-10 py-6 sm:py-8 text-center min-h-[40vh] sm:min-h-[50vh] flex flex-col justify-center">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4 font-bold mt-4 sm:mt-6 leading-snug">
-                    Discover Amazing <br className="hidden sm:block" /> Projects
-                </h1>
-                <p className="mt-2 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto px-4">
-                    Explore innovative projects built by talented developers from{" "}
-                    <br className="hidden sm:block" /> across the MEST community
-                </p>
-            </section>
+                        </div>
+            ) : (
 
             <div className="min-h-screen px-4 sm:px-6 lg:px-8 bg-white">
                 {/* Category Tabs */}
@@ -383,7 +366,8 @@ const Projects = () => {
                     </div>
                 )}
             </div>
-
+            )}
+            
             {/* Filter Sidebar */}
             {showFilterSidebar && (
                 <ProjectFilterSidebar
