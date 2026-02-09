@@ -1,51 +1,45 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import VideoPlayer from './VideoPlayer';
+
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState({});
-  const videoRefs = useRef({});
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   // Sample testimonials data - replace with your actual data
   const testimonials = [
     {
       id: 1,
-      videoUrl: 'https://res.cloudinary.com/dofmc4azg/video/upload/v1770225367/Elizabeth_Nuoma_Akossey_mk5lqh.mp4',
+      videoUrl: 'https://www.youtube.com/watch?v=f7DNBFqk2yI',
       quote: 'MEST transformed me from a curious beginner to a confident frontend developer. The hands-on projects and mentorship prepared me for real-world challenges.',
     },
+    {
+      id: 1,
+      videoUrl: 'https://www.youtube.com/watch?v=f7DNBFqk2yI',
+      quote: 'MEST transformed me from a curious beginner to a confident frontend developer. The hands-on projects and mentorship prepared me for real-world challenges.',
+    },
+    {
+      id: 1,
+      videoUrl: 'https://www.youtube.com/watch?v=f7DNBFqk2yI',
+      quote: 'MEST transformed me from a curious beginner to a confident frontend developer. The hands-on projects and mentorship prepared me for real-world challenges.',
+    },
+ 
    
   ];
 
-  const handlePlayPause = (id) => {
-    const video = videoRefs.current[id];
-    if (video) {
-      if (isPlaying[id]) {
-        video.pause();
-      } else {
-        video.play();
-      }
-      setIsPlaying({ ...isPlaying, [id]: !isPlaying[id] });
-    }
+  // Extract YouTube video ID from URL
+  const getYouTubeThumbnail = (url) => {
+    const videoId = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/watch\?.+&v=))([\w-]{11})/)?.[1];
+    return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const openVideoModal = (testimonial) => {
+    setSelectedVideo(testimonial);
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const getVisibleTestimonials = () => {
-  const visible = [];
-  const itemsToShow = Math.min(3, testimonials.length); // Don't show more than available
-  for (let i = 0; i < itemsToShow; i++) {
-    const index = (currentIndex + i) % testimonials.length;
-    visible.push({ ...testimonials[index], position: i });
-  }
-  return visible;
-};
+  
 
   return (
     <section className="relative py-20 px-4 bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden">
@@ -77,177 +71,47 @@ const Testimonials = () => {
         </motion.div>
 
         {/* Desktop View - Grid Layout */}
-        <div className="hidden md:block">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <AnimatePresence mode="popLayout">
-              {getVisibleTestimonials().map((testimonial, idx) => (
-                <motion.div
-                  key={`${testimonial.id}-${idx}`}
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                  transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  className="group relative"
-                >
-                  <div className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-200/50">
-                    {/* Video Section */}
-                    <div className="relative aspect-video bg-slate-900">
-                      <video
-                        ref={(el) => (videoRefs.current[`${testimonial.id}-${idx}`] = el)}
-                        className="w-full h-full object-cover"
-                        preload="metadata"
-                        playsInline
-                        controlsList="nodownload"
-                        onEnded={() => setIsPlaying({ ...isPlaying, [`${testimonial.id}-${idx}`]: false })}
-                        onError={(e) => console.error('Video error:', e)}
-                      >
-                        <source src={testimonial.videoUrl} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+      
 
-                      {/* Play/Pause Overlay */}
-                      <div
-                        className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isPlaying[`${testimonial.id}-${idx}`] ? 'opacity-0 hover:opacity-100' : 'opacity-100'
-                          }`}
-                      >
-                        <button
-                          onClick={() => handlePlayPause(`${testimonial.id}-${idx}`)}
-                          className="w-16 h-16 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transform hover:scale-110 transition-all duration-200"
-                        >
-                          {isPlaying[`${testimonial.id}-${idx}`] ? (
-                            <Pause className="w-8 h-8 text-slate-900 ml-0.5" />
-                          ) : (
-                            <Play className="w-8 h-8 text-slate-900 ml-1" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="p-6">
-                      {/* Quote */}
-                      <p className="text-slate-700 text-base leading-relaxed">
-                        "{testimonial.quote}"
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-center gap-4">
-            <button
-              onClick={handlePrev}
-              className="w-12 h-12 flex items-center justify-center bg-white hover:bg-blue-600 text-slate-700 hover:text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            <div className="flex gap-2">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-blue-600' : 'w-2 bg-slate-300 hover:bg-slate-400'
-                    }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={handleNext}
-              className="w-12 h-12 flex items-center justify-center bg-white hover:bg-blue-600 text-slate-700 hover:text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile View - Single Card */}
-        <div className="md:hidden">
-          <AnimatePresence mode="wait">
+        {/* Testimonial Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
             <motion.div
-              key={testimonials[currentIndex].id}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.3 }}
-              className="mb-8"
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
             >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200/50">
-                {/* Video Section */}
-                <div className="relative aspect-video bg-slate-900">
-                  <video
-                    ref={(el) => (videoRefs.current[testimonials[currentIndex].id] = el)}
-                    className="w-full h-full object-cover"
-                    preload="metadata"
-                    playsInline
-                    controlsList="nodownload"
-                    onEnded={() => setIsPlaying({ ...isPlaying, [testimonials[currentIndex].id]: false })}
-                    onError={(e) => console.error('Video error:', e)}
+              {/* Video Thumbnail */}
+              <div className="relative aspect-video bg-gradient-to-br from-blue-500 to-indigo-600 overflow-hidden">
+                {/* YouTube Thumbnail */}
+                <img 
+                  src={getYouTubeThumbnail(testimonial.videoUrl)} 
+                  alt="Video thumbnail"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <button
+                    onClick={() => openVideoModal(testimonial)}
+                    className="relative z-10 w-16 h-16 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 group-hover:scale-110"
+                    aria-label="Play video"
                   >
-                    <source src={testimonials[currentIndex].videoUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-
-                  {/* Play/Pause Overlay */}
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isPlaying[testimonials[currentIndex].id] ? 'opacity-0 hover:opacity-100' : 'opacity-100'
-                      }`}
-                  >
-                    <button
-                      onClick={() => handlePlayPause(testimonials[currentIndex].id)}
-                      className="w-16 h-16 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transform hover:scale-110 transition-all duration-200"
-                    >
-                      {isPlaying[testimonials[currentIndex].id] ? (
-                        <Pause className="w-8 h-8 text-slate-900 ml-0.5" />
-                      ) : (
-                        <Play className="w-8 h-8 text-slate-900 ml-1" />
-                      )}
-                    </button>
-                  </div>
+                    <Play className="w-8 h-8 text-blue-600 fill-blue-600 ml-1" />
+                  </button>
                 </div>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+              </div>
 
-                {/* Content Section */}
-                <div className="p-6">
-                  {/* Quote */}
-                  <p className="text-slate-700 text-base leading-relaxed">
-                    "{testimonials[currentIndex].quote}"
-                  </p>
-                </div>
+              {/* Quote */}
+              <div className="p-6">
+                <p className="text-slate-700 leading-relaxed line-clamp-4">
+                  "{testimonial.quote}"
+                </p>
               </div>
             </motion.div>
-          </AnimatePresence>
-
-          {/* Mobile Navigation */}
-          <div className="flex items-center justify-center gap-4">
-            <button
-              onClick={handlePrev}
-              className="w-12 h-12 flex items-center justify-center bg-white active:bg-blue-600 text-slate-700 active:text-white rounded-full shadow-lg transition-all duration-200"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            <div className="flex gap-2">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-blue-600' : 'w-2 bg-slate-300'
-                    }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={handleNext}
-              className="w-12 h-12 flex items-center justify-center bg-white active:bg-blue-600 text-slate-700 active:text-white rounded-full shadow-lg transition-all duration-200"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+          ))}
         </div>
 
         {/* Stats Section */}
@@ -276,6 +140,13 @@ const Testimonials = () => {
           ))}
         </motion.div> */}
       </div>
+
+      {/* Video Player Modal */}
+      <VideoPlayer
+        videoUrl={selectedVideo?.videoUrl}
+        isOpen={!!selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+      />
     </section>
   );
 };
