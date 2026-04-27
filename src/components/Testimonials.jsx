@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
-import VideoPlayer from './VideoPlayer';
-
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play, ChevronLeft, ChevronRight, X } from "lucide-react";
+import VideoPlayer from "./VideoPlayer";
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,34 +11,47 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      videoUrl: 'https://www.youtube.com/watch?v=f7DNBFqk2yI',
-      quote: 'MEST transformed me from a curious beginner to a confident frontend developer. The hands-on projects and mentorship prepared me for real-world challenges.',
+      videoUrl:
+        "https://www.youtube.com/watch?v=gt36jujLAPc&list=PLuhCeKxr95f_t_MPARoUF4THeLxQIwXuB&index=1&pp=iAQB",
+      quote:
+        "Kasia is a Frontend Developer and problem-solver with strong business acumen. Her background in logistics and project management brings an analytical, detail-oriented approach to her work. Skilled in React, Tailwind, HTML, CSS, JavaScript, GitHub, and UI/UX, she delivers quality results that balance technical execution with strategic thinking.",
     },
     {
-      id: 1,
-      videoUrl: 'https://www.youtube.com/watch?v=f7DNBFqk2yI',
-      quote: 'MEST transformed me from a curious beginner to a confident frontend developer. The hands-on projects and mentorship prepared me for real-world challenges.',
+      id: 4,
+      videoUrl:
+        "https://www.youtube.com/watch?v=wNZCVfOw_8w&list=PLuhCeKxr95f_t_MPARoUF4THeLxQIwXuB&index=5",
+      quote:
+        "Kweku Agyeman-Gyebi confidently positions himself as a junior web developer with creativity at the core of his work; an edge that enables him to deliver solutions that stand out.",
     },
     {
-      id: 1,
-      videoUrl: 'https://www.youtube.com/watch?v=f7DNBFqk2yI',
-      quote: 'MEST transformed me from a curious beginner to a confident frontend developer. The hands-on projects and mentorship prepared me for real-world challenges.',
+      id: 2,
+      videoUrl:
+        "https://www.youtube.com/watch?v=3EHzBOWwdeo&list=PLuhCeKxr95f_t_MPARoUF4THeLxQIwXuB&index=3",
+      quote:
+        "With a background in Actuarial Science and experience as a Data Analyst, Elizabeth Sampong transitioned into tech to build solutions that create real impact. Trained as a Backend Developer, she also excels in Frontend development, working with Node.js, React, MongoDB, and Next.js on real-world projects.",
     },
- 
-   
+    {
+      id: 3,
+      videoUrl:
+        "https://www.youtube.com/watch?v=yCu4hDLzwKQ&list=PLuhCeKxr95f_t_MPARoUF4THeLxQIwXuB&index=3&pp=iAQB",
+      quote:
+        "Beyond his backend development expertise, Alpheaus Gberbie possesses valuable skills in marketing and sales, giving him a unique perspective that bridges technical execution with business strategy.",
+    },
   ];
 
   // Extract YouTube video ID from URL
   const getYouTubeThumbnail = (url) => {
-    const videoId = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/watch\?.+&v=))([\w-]{11})/)?.[1];
-    return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
+    const videoId = url.match(
+      /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/watch\?.+&v=))([\w-]{11})/,
+    )?.[1];
+    return videoId
+      ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+      : null;
   };
 
   const openVideoModal = (testimonial) => {
     setSelectedVideo(testimonial);
   };
-
-  
 
   return (
     <section className="relative py-20 px-4 bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden">
@@ -66,12 +78,12 @@ const Testimonials = () => {
             Meet Our Talented Developers
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Discover the journeys of MEST developers who transformed their careers through our intensive program
+            Discover the journeys of MEST developers who transformed their
+            careers through our intensive program
           </p>
         </motion.div>
 
         {/* Desktop View - Grid Layout */}
-      
 
         {/* Testimonial Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -87,8 +99,8 @@ const Testimonials = () => {
               {/* Video Thumbnail */}
               <div className="relative aspect-video bg-gradient-to-br from-blue-500 to-indigo-600 overflow-hidden">
                 {/* YouTube Thumbnail */}
-                <img 
-                  src={getYouTubeThumbnail(testimonial.videoUrl)} 
+                <img
+                  src={getYouTubeThumbnail(testimonial.videoUrl)}
                   alt="Video thumbnail"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -107,7 +119,7 @@ const Testimonials = () => {
               {/* Quote */}
               <div className="p-6">
                 <p className="text-slate-700 leading-relaxed line-clamp-4">
-                  "{testimonial.quote}"
+                  {testimonial.quote}
                 </p>
               </div>
             </motion.div>
