@@ -2,8 +2,8 @@ import { useState } from "react";
 import { X, Search } from "lucide-react";
 
 // Predefined lists for filter options
-const skillsList = ["ReactJS", "Node.js", "Css 3", "HTML5", "Tailwind", "Javascript"];
-const rolesList = ["Backend", "Frontend", "Fullstack"];
+const skillsList = ["ReactJS", "Node.js", "Css 3", "HTML5", "Tailwind", "Javascript", "Python", "Digital Marketing"];
+const rolesList = ["Backend", "Frontend", "Fullstack", "Digital Marketer"];
 // const availabilityList = ["Available", "Full-time", "Part-time", "Contract"];
 const availabilityList = ["Yes", "No"];
 const cohortsList = ["Cohort 4", "Cohort 5" , "Cohort 6"]; // Example cohorts

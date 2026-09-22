@@ -55,17 +55,26 @@ export default function TalentsPage() {
       .then((response) => {
         const portfolios = response.data.portfolios || response.data;
         if (Array.isArray(portfolios)) {
-          // ✅ Sort by cohort first (Cohort 6 first), then alphabetically by name
+          // ✅ Sort by cohort first (Digital Marketing cohort first, then Cohort 6), then alphabetically by name
+          const isDigitalMarketingCohort = (cohort) =>
+            cohort.trim().toUpperCase().startsWith("DM");
+
           const sortedPortfolios = [...portfolios].sort((a, b) => {
             // Get cohort values
             const cohortA = a.cohort || "";
             const cohortB = b.cohort || "";
 
-            // Prioritize Cohort 6
+            // Prioritize the Digital Marketing cohort (e.g. "DM Cohort 1 PlugIn", "DM C1 Plugin")
+            const dmA = isDigitalMarketingCohort(cohortA);
+            const dmB = isDigitalMarketingCohort(cohortB);
+            if (dmA && !dmB) return -1;
+            if (!dmA && dmB) return 1;
+
+            // Then prioritize Cohort 6
             if (cohortA === "Cohort 6" && cohortB !== "Cohort 6") return -1;
             if (cohortA !== "Cohort 6" && cohortB === "Cohort 6") return 1;
 
-            // If both are Cohort 6 or both are not, sort alphabetically by name
+            // Otherwise, sort alphabetically by name
             return a.name.localeCompare(b.name);
           });
 
